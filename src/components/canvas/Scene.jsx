@@ -12,15 +12,33 @@ import Wormhole from './Wormhole'
 import Pulsar from './Pulsar'
 import Comet from './Comet'
 import ExplodingPlanet from './ExplodingPlanet'
+import SpaceBattle from './SpaceBattle'
 import Overlay from '../dom/Overlay'
 
 function CameraRig() {
     const scroll = useScroll()
+    const vec = new THREE.Vector3()
 
     useFrame((state, delta) => {
+        // Base scroll position (vertical)
         const targetY = -scroll.offset * 20
-        state.camera.position.y = targetY
-        state.camera.lookAt(0, targetY - 2, 0)
+
+        // Mouse/Pointer Parallax (Horizontal & Vertical)
+        // state.pointer.x is -1 to 1
+        const parallaxX = state.pointer.x * 2 // Move camera left/right by up to 2 units
+        const parallaxY = state.pointer.y * 1 // Move camera up/down by up to 1 unit
+
+        // Smoothly interpolate camera position
+        // X: just parallax
+        // Y: scroll position + parallax
+        // Z: fixed at 5 (default) or dynamic
+        state.camera.position.x = THREE.MathUtils.lerp(state.camera.position.x, parallaxX, 0.05)
+        state.camera.position.y = THREE.MathUtils.lerp(state.camera.position.y, targetY + parallaxY, 0.05)
+
+        // LookAt logic:
+        // Always look "ahead" but slightly offset by mouse to create rotation feel
+        vec.set(0, targetY - 2, 0)
+        state.camera.lookAt(vec)
     })
     return null
 }
@@ -60,6 +78,11 @@ export default function Scene() {
                         <group position={[5, 2, -5]}>
                             <Planet type="gas" color="#4400ff" size={2} />
                         </group>
+
+                        {/* Space Chase: Spaceship shooting another spaceship */}
+                        <group position={[0, -4, 2]}>
+                            <SpaceBattle />
+                        </group>
                     </group>
 
                     {/* Phase 4: Planet Destruction (The End) */}
@@ -95,11 +118,12 @@ export default function Scene() {
                 </Scroll>
             </ScrollControls>
 
-            <EffectComposer disableNormalPass>
-                {/* Cinematic Gold Bloom */}
+            <EffectComposer disableNormalPass multisampling={0}>
+                {/* Cinematic Gold Bloom - Optimized */}
                 <Bloom luminanceThreshold={0.4} luminanceSmoothing={0.9} height={300} intensity={1.5} radius={0.6} />
-                <Noise opacity={0.2} /> {/* Heavier grain for Interstellar film look */}
+                <Noise opacity={0.15} />
                 <Vignette eskil={false} offset={0.1} darkness={1.1} />
+                {/* ChromaticAberration is cheap, keeping it */}
                 <ChromaticAberration offset={[0.003, 0.003]} />
             </EffectComposer>
         </>
