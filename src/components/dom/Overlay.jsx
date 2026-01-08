@@ -4,7 +4,7 @@ const Section = ({ children, style }) => {
     return (
         <section
             style={{
-                height: '100vh',
+                minHeight: '100vh',
                 width: '100vw',
                 position: 'relative',
                 padding: '10vw',
@@ -32,20 +32,21 @@ export default function Overlay() {
                     style={{
                         background: 'rgba(255, 255, 255, 0.03)',
                         backdropFilter: 'blur(20px)',
-                        padding: '3rem',
+                        padding: 'clamp(1.5rem, 5vw, 3rem)', // Responsive padding
                         borderRadius: '20px',
                         borderTop: '1px solid rgba(255, 255, 255, 0.5)',
                         borderLeft: '1px solid rgba(255, 255, 255, 0.5)',
                         borderRight: '1px solid rgba(255, 255, 255, 0.1)',
                         borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
                         boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+                        width: '90%', // Ensure it doesn't touch edges
                         maxWidth: '900px'
                     }}
                 >
-                    <h1 className="text-display text-gradient" style={{ fontSize: '5rem', lineHeight: '0.9', marginBottom: '2rem' }}>
+                    <h1 className="text-display text-gradient" style={{ fontSize: 'clamp(2.5rem, 8vw, 5rem)', lineHeight: '1.1', marginBottom: '1.5rem', wordBreak: 'break-word' }}>
                         SHIVANAND VERMA
                     </h1>
-                    <p style={{ maxWidth: '600px', marginBottom: '2rem', lineHeight: '1.6', fontSize: '1.2rem', color: '#eee' }}>
+                    <p style={{ maxWidth: '600px', marginBottom: '2rem', lineHeight: '1.6', fontSize: 'clamp(1rem, 2vw, 1.2rem)', color: '#eee' }}>
                         B.Tech Computer Science student specializing in AI/ML and Creative Web Development.
                         Building innovative solutions with Data Structures, Machine Learning, and Interactive 3D Web approaches.
                     </p>
@@ -86,10 +87,10 @@ export default function Overlay() {
                     transition={{ duration: 1 }}
                 >
                     <h3 style={{ color: '#FF00E6', marginBottom: '1rem', letterSpacing: '0.2em' }} className="text-display">MY SKILLS</h3>
-                    <h1 className="text-display" style={{ fontSize: '4rem', lineHeight: '1', maxWidth: '600px', marginBottom: '1rem' }}>
+                    <h1 className="text-display" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', lineHeight: '1', maxWidth: '600px', marginBottom: '1rem' }}>
                         CORE <span className="text-gradient">STACK</span>
                     </h1>
-                    <ul style={{ listStyle: 'none', fontSize: '1.5rem', lineHeight: '1.8', fontWeight: 300 }}>
+                    <ul style={{ listStyle: 'none', fontSize: 'clamp(1rem, 2vw, 1.5rem)', lineHeight: '1.8', fontWeight: 300 }}>
                         <li>JAVA / PYTHON / C++</li>
                         <li>REACT / NEXT.JS / THREE.JS</li>
                         <li>MACHINE LEARNING / TENSORFLOW</li>
@@ -107,10 +108,10 @@ export default function Overlay() {
                     style={{ marginBottom: '10vh', width: '100%' }}
                 >
                     <h3 style={{ color: '#00E5FF', marginBottom: '1rem', letterSpacing: '0.2em' }} className="text-display">LATEST WORK</h3>
-                    <h1 className="text-display" style={{ fontSize: '3rem', maxWidth: '800px', marginBottom: '3rem', marginInline: 'auto' }}>
+                    <h1 className="text-display" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', maxWidth: '800px', marginBottom: '3rem', marginInline: 'auto' }}>
                         FEATURED PROJECTS
                     </h1>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', textAlign: 'left', maxWidth: '1200px', marginInline: 'auto' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', textAlign: 'left', maxWidth: '1200px', marginInline: 'auto', width: '100%' }}>
 
                         {/* Project 1 */}
                         <div
@@ -213,10 +214,10 @@ export default function Overlay() {
                     transition={{ duration: 1 }}
                 >
                     <h3 style={{ color: '#FFD700', marginBottom: '1rem', letterSpacing: '0.2em' }} className="text-display">CONTACT</h3>
-                    <h1 className="text-display text-gradient" style={{ fontSize: '5rem', marginBottom: '2rem' }}>
+                    <h1 className="text-display text-gradient" style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', marginBottom: '2rem' }}>
                         LET'S BUILD<br />THE FUTURE
                     </h1>
-                    <div style={{ display: 'flex', gap: '3rem', justifyContent: 'center' }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(1rem, 5vw, 3rem)', justifyContent: 'center' }}>
                         <a href="mailto:shivanandbbk06@gmail.com" className="interactive" style={{ color: '#fff', textDecoration: 'none', borderBottom: '1px solid #fff', fontSize: '1.2rem' }}>EMAIL</a>
                         <a href="https://linkedin.com/in/starkbbk" target="_blank" className="interactive" style={{ color: '#fff', textDecoration: 'none', borderBottom: '1px solid #fff', fontSize: '1.2rem' }}>LINKEDIN</a>
                         <a href="https://github.com/starkbbk" target="_blank" className="interactive" style={{ color: '#fff', textDecoration: 'none', borderBottom: '1px solid #fff', fontSize: '1.2rem' }}>GITHUB</a>

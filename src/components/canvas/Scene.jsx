@@ -57,7 +57,8 @@ export default function Scene() {
 
             <Environment preset="city" blur={1} />
 
-            <ScrollControls pages={4} damping={0.3}>
+            {/* Increased pages to accommodate mobile vertical stacking */}
+            <ScrollControls pages={6} damping={0.3}>
                 <CameraRig />
 
                 <Scroll>
